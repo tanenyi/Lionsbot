@@ -183,16 +183,15 @@ function selection(number)
 function showRobot(robot)
 {
     var content = $("<div>",
-    {
-        class: "text-center"
-    });
-    content.append(
-        $("<div>",
+        {
+            class: "text-center"
+        });
+    var mainContent = $("<div>",
         {
             id: "mainContent",
             class: "card"
-        })
-    );
+        });
+    content.append(mainContent);
     content.append(
         $("<div>",
         {
@@ -357,7 +356,11 @@ function showRobot(robot)
 
         $("#intro").append(col);
     });
+    showModal();
+}
 
+function showModal()
+{
     var modal = $("<div>",
         {
             id: "modal",
@@ -367,57 +370,26 @@ function showRobot(robot)
             ariaLabelledby: "exampleModalLabel",
             ariaHidden: "true"
         });
-
     var dialog = $("<div>",
         {
             class: "modal-dialog",
             role: "document"
         });
-    //hello
-
     var content = $("<div>",
         {
             class: "modal-content"
         });
-
     var header = $("<div>",
         {
             id: "robotName",
             class: "modal-header text-center"
         });
-
     var body = $("<div>",
         {
             class: "modal-body"
-        }).html("Model number<br>Dimensions (product): 735(L) x 630(W) x 1100(H)<br>Scrubbing width	: 450mm (2x 9 inch)<br>Brush Pressure	: 50Kg, 63 g/cm2<br>Solution Tank	: 35L<br>Recovery Tank	: 35L<br>Z water Cartridge	: 2L<br>Noise Level	: 59dB /cm2<br>Max cleaning coverage	: 1600m2/hr<br>Turning radius		: 870mm full turn<br>Cleaning speed	: 0.5 - 1m/s<br>Movement speed	: 0.2 - 2m/s<br>Battery Specs	: 24V 120Ah LiFePO4<br>Time to full charge	: 2 Hrs<br>Running time	: 3 Hrs<br>Weight of machine (max): 220Kg<br>Connectivity: 3G / 4G, Wif");
+        }).html("Model number<br>Dimensions (product): 735(L) x 630(W) x 1100(H)<br>Scrubbing width	: 450mm (2x 9 inch)<br>Brush Pressure	: 50Kg, 63 g/cm2<br>Solution Tank	: 35L<br>Recovery Tank	: 35L<br>Z water Cartridge	: 2L<br>Noise Level	: 59dB /cm2<br>Max cleaning coverage	: 1600m2/hr<br>Turning radius		: 870mm full turn<br>Cleaning speed	: 0.5 - 1m/s<br>Movement speed	: 0.2 - 2m/s<br>Battery Specs	: 24V 120Ah LiFePO4<br>Time to full charge	: 2 Hrs<br>Running time	: 3 Hrs<br>Weight of machine (max): 220Kg<br>Connectivity: 3G / 4G, Wifi");
 
-    var total = modal.append(dialog.append(content.append(header).append(body)));
+    var content = modal.append(dialog.append(content.append(header).append(body)));
 
-    $("body").append(total);
-    // ).append(
-    //     $("<div>",
-    //     {
-    //         class: "card-body"
-    //     }).append(
-    //         $("<h3>",
-    //         {
-    //             class: "card-title"
-    //         }).html(robot.get("name"))
-    //     ).append(
-    //         $("<p>",
-    //         {
-    //             class: "card-text"
-    //         }).html(prettifyStatus(robot.get("status")))
-    //     ).append(
-    //         $("<p>",
-    //         {
-    //             class: "card-text"
-    //         }).html(robot.get("model") + " (SN: " + robot.get("serial") + ")")
-    //     ).append(
-    //         $("<p>",
-    //         {
-    //             class: "card-text text-secondary"
-    //         }).html("@ " + robot.get("location"))
-    //     )
-    // )
+    $("body").append(content);
 }
