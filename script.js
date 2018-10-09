@@ -19,6 +19,7 @@ $(
             tnc(serial);
         }
     }
+    //i dunno
 );
 
 function autostart()
@@ -475,6 +476,7 @@ function showRobot(robot)
             class: "modal-dialog",
             role: "document"
         });
+    //hello
 
     var content = $("<div>",
         {
