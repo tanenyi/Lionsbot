@@ -475,6 +475,7 @@ function showRobot(robot)
             class: "modal-dialog",
             role: "document"
         });
+    //hello
 
     var content = $("<div>",
         {
