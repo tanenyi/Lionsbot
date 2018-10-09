@@ -55,7 +55,7 @@ function signupToFirebase(serial)
             id: "loginWidget"
         });
 
-    var content = jumbo.append(logo).append(spacer).append(title).append(spacer).append(widget);
+    var content = jumbo.append([logo, spacer, title, spacer, widget]);
 
     $("body").html(jumbo);
     createLoginWidget()
@@ -104,7 +104,7 @@ function termsNconditions(serial)
     var textwall = $("<p>").html("You agree to the following...");
     var selectionRow = $("<div>",
         {
-            class: "row"
+            class: "row justify-content-center"
         });
     var horizontalSpacer = "&emsp;&emsp;&emsp;";
     var disagreeButton = $("<button>",
@@ -128,8 +128,8 @@ function termsNconditions(serial)
             showRobot(serial);
         });
 
-    var row = selectionRow.append(disagreeButton).append(horizontalSpacer).append(agreeButton);
-    var content = jumbo.append(logo).append(spacer).append(title).append(spacer).append(textwall).append(spacer).append(row);
+    var row = selectionRow.append([disagreeButton, horizontalSpacer, agreeButton]);
+    var content = jumbo.append([logo, spacer, title, spacer, textwall, spacer, row]);
 
     $("body").html(content);
 }
@@ -180,104 +180,92 @@ function selection(number)
     { $("#mainContent").slideUp("fast"); }
 }
 
-function showRobot(robot)
+function createInteractCard()
 {
-    var content = $("<div>",
+    var interactCard = $("<div>",
         {
-            class: "text-center"
-        });
-    var mainContent = $("<div>",
-        {
-            id: "mainContent",
             class: "card"
         });
-    content.append(mainContent);
-    content.append(
-        $("<div>",
+    var interactHeader = $("<div>",
         {
-            class: "accordion"
-        }).append(
-            $("<div>",
-            {
-                class: "card"
-            }).append(
-                $("<div>",
-                {
-                    class: "card-header"
-                }).append(
-                    $("<h4>").html("Interact" + "&emsp;&emsp;<i class='fas fa-hand-point-up'></i>")
-                ).click(function()
-                {
-                    selection(0);
-                })
-            ).append(
-                $("<div>",
-                {
-                    id: "questions",
-                    class: "card-body textwall"
-                })
-            )
-        ).append(
-            $("<div>",
-            {
-                class: "card"
-            }).append(
-                $("<div>",
-                {
-                    class: "card-header"
-                }).append(
-                    $("<h4>").html("Suggest" + "&emsp;&emsp;<i class='far fa-comment'></i>")
-                ).click(function()
-                {
-                    selection(1);
-                })
-            ).append(
-                $("<div>",
-                {
-                    class: "card-body textwall"
-                }).append(
-                    $("<img>",
-                    {
-                        src: robot.get("map").url()
-                    })
-                )
-            )
-        ).append(
-            $("<div>",
-            {
-                class: "card"
-            }).append(
-                $("<div>",
-                {
-                    class: "card-header"
-                }).append(
-                    $("<h4>").html("About" + "&emsp;&emsp;<i class='fas fa-info-circle'></i>")
-                ).click(function()
-                {
-                    selection(3);
-                })
-            ).append(
-                $("<div>",
-                {
-                    class: "card-body textwall"
-                }).html("Made on 27th September 2018\nCourtesy of Lionsbot\n\nFind out more on our website!")
-            )
-        )
-    )
-    $("body").html(content);
-    var alternate = false
+            class: "card-header"
+        });
+    var interactTitle = $("<h4>").html("Interact" + "&emsp;&emsp;<i class='fas fa-hand-point-up'></i>");
+    var interactContent = $("<div>",
+        {
+            id: "questions",
+            class: "card-body textwall"
+        });
+
+    interactHeader.click(function()
+        {
+            selection(0);
+        });
+
+    return interactCard.append([interactHeader.append(interactTitle), interactContent]);
+}
+
+function createSuggestCard()
+{
+    var suggestCard = $("<div>",
+        {
+            class: "card"
+        });
+    var suggestHeader = $("<div>",
+        {
+            class: "card-header"
+        });
+    var suggestTitle = $("<h4>").html("Suggest" + "&emsp;&emsp;<i class='far fa-comment'></i>");
+    // TODO: need to make a bootstrap form here
+    var suggestContent = $("<div>",
+        {
+            id: "suggestions",
+            class: "card-body textwall"
+        });
+
+    suggestHeader.click(function()
+        {
+            selection(1);
+        });
+
+    return suggestCard.append([suggestHeader.append(suggestTitle), suggestContent]);
+}
+
+function createAboutCard()
+{
+    var aboutCard = $("<div>",
+        {
+            class: "card"
+        });
+    var aboutHeader = $("<div>",
+        {
+            class: "card-header"
+        });
+    var aboutTitle = $("<h4>").html("About" + "&emsp;&emsp;<i class='fas fa-info-circle'></i>");
+    var aboutContent = $("<div>",
+        {
+            class: "card-body textwall"
+        }).html("Made on 27th September 2018\nCourtesy of Lionsbot\n\nFind out more on our website!");
+
+    aboutHeader.click(function()
+        {
+            selection(2);
+        });
+
+    return aboutCard.append([aboutHeader.append(aboutTitle), aboutContent]);
+}
+
+function fillQuestions()
+{
     firebase.database().ref().child("questions").on('child_added', snap => {
         var num = $("<div>",
             {
                 class: "col-3"
             }).append($("<p>").text(snap.child("question_id").val()));
-
-
         var question = $("<div>",
             {
                 class: "col-9"
             }).append($("<p>").text(snap.child("name").val()));
-
         var row = $("<div>",
             {
                 class: "row text-center"
@@ -292,41 +280,11 @@ function showRobot(robot)
         });
 
         $("#questions").append(row);
-
     });
+}
 
-    $("#mainContent").append($("<div>",
-    {
-        class: "row align-items-center"
-    }).append($("<div>",
-        {
-            id: "intro",
-            class: "col-3 text-center"
-        })
-    ).append($("<div>",
-        {
-            class: "col-6"
-        }).append($("<img>",
-            {
-                class: "card-img-top mx-auto",
-                src: "rotating.gif"//robot.get("image").url()
-            }).click(function()
-                {
-                    $("#modal").modal("toggle");
-                }))
-    ).append($("<div>",
-        {
-            class: "col-3"
-        }).append($("<div>",
-            {
-                class: "row socialIcons"
-            }).html("<i class='fab fa-facebook fa-4x'></i><br><i class='fab fa-twitter fa-4x'></i><br><i class='fas fa-share-square fa-4x'></i>"))
-        )
-    );
-    $(".textwall").hide();
-
-    var robotName;
-
+function fillIntro()
+{
     var data = firebase.database().ref("robots").orderByKey().equalTo(String(parseInt(serial)))
     data.on("child_added", function(word)
     {
@@ -335,27 +293,87 @@ function showRobot(robot)
             {
                 class: "row"
             }).append($("<h3>").text(robotName));
-
-        $("#robotName").append($("<h3>").text(robotName));
-
         var type = $("<div>",
             {
                 class: "row"
             }).append($("<p>").text(word.child("type").val()));
-
         var character = $("<div>",
             {
                 class: "row"
             }).append($("<p>").text(word.child("character").val()));
-
         var col = $("<div>",
             {
                 class: "col"
             }).append(name).append(type).append(character);
 
-
+        $("#robotName").append($("<h3>").text(robotName));
         $("#intro").append(col);
     });
+}
+
+function fillMainContent()
+{
+    var row = $("<div>",
+        {
+            class: "row align-items-center"
+        });
+    var left = $("<div>",
+        {
+            id: "intro",
+            class: "col-3 text-center"
+        });
+    var center = $("<div>",
+        {
+            class: "col-6"
+        });
+    var photo = $("<img>",
+        {
+            class: "card-img-top mx-auto",
+            src: "rotating.gif"//robot.get("image").url()
+        });
+    var right = $("<div>",
+        {
+            class: "col-3"
+        });
+    var rightContent = $("<div>",
+            {
+                class: "row socialIcons"
+            });
+
+    photo.click(function()
+        {
+            $("#modal").modal("toggle");
+        });
+
+    rightContent.html("<i class='fab fa-facebook fa-4x'></i><br><i class='fab fa-twitter fa-4x'></i><br><i class='fas fa-share-square fa-4x'></i>");
+
+    $("#mainContent").append(row.append([left, center.append(photo), right.append(rightContent)]));
+}
+
+function showRobot(robot)
+{
+    var content = $("<div>",
+        {
+            class: "text-center"
+        });
+    var mainContent = $("<div>",
+        {
+            id: "mainContent",
+            class: "card"
+        });
+    var accordion = $("<div>",
+        {
+            class: "accordion"
+        });
+
+    var selection = accordion.append([createInteractCard(), createSuggestCard(), createAboutCard()]);
+
+    $("body").html(content.append([mainContent, selection]));
+    $(".textwall").hide();
+
+    fillQuestions();
+    fillIntro();
+    fillMainContent();
     showModal();
 }
 
