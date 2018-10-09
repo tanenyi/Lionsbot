@@ -19,6 +19,7 @@ $(
             tnc(serial);
         }
     }
+    //i dunno
 );
 
 function autostart()
