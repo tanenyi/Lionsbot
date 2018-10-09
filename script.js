@@ -375,6 +375,7 @@ function showRobot(robot)
                 class: "col-3"
             }).append($("<p>").text(snap.child("question_id").val()));
 
+
         var question = $("<div>",
             {
                 class: "col-9"
