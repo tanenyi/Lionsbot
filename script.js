@@ -205,6 +205,56 @@ function createInteractCard()
     return interactCard.append([interactHeader.append(interactTitle), interactContent]);
 }
 
+function createSuggestForm()
+{
+    var form = $("<div>");
+    var group = $("<div>",
+        {
+            class: "form-group"
+        });
+    var emailLabel = $("<label>").text("Email Address");
+    var emailInput = $("<input>",
+        {
+            id: "email",
+            type: "email",
+            class: "form-control",
+            placeholder: "name@example.com"
+        });
+    var typeLabel = $("<label>").text("Question Type");
+    var typeInput = $("<select>",
+        {
+            id: "type",
+            class: "form-control"
+        });
+    var textLabel = $("<label>").text("Description");
+    var textInput = $("<textarea>",
+        {
+            id: "text",
+            class: "form-control",
+            rows: "3"
+        });
+    var button = $("<button>",
+        {
+            class: "btn btn-success"
+        }).text("Submit");
+
+    for (var i = 0; i < 6; i++)
+    {
+        typeInput.append("<option>" + i + "</option>");
+    }
+
+    button.click(function()
+        {
+            database.ref('/suggestions').push({
+                email: $("#email").val(),
+                type: $("#type").val(),
+                text: $("#text").val(),
+            });
+        });
+
+    return [form.append([group.append([emailLabel, emailInput]), group.append([typeLabel, typeInput]), group.append([textLabel, textInput])]), button];
+}
+
 function createSuggestCard()
 {
     var suggestCard = $("<div>",
@@ -219,7 +269,6 @@ function createSuggestCard()
     // TODO: need to make a bootstrap form here
     var suggestContent = $("<div>",
         {
-            id: "suggestions",
             class: "card-body textwall"
         });
 
@@ -228,7 +277,7 @@ function createSuggestCard()
             selection(1);
         });
 
-    return suggestCard.append([suggestHeader.append(suggestTitle), suggestContent]);
+    return suggestCard.append([suggestHeader.append(suggestTitle), suggestContent.append(createSuggestForm())]);
 }
 
 function createAboutCard()
@@ -272,12 +321,13 @@ function fillQuestions()
             }).append(num).append(question);
 
         row.click(function()
-        {
-            var data = {IsFree: false, selected_QuesID:snap.child("question_id").val()}
-            var updates = {};
-            updates['/robots/'+parseInt(serial)] = data;
-            firebase.database().ref().update(updates);
-        });
+            {
+            firebase.database().ref('/robots/'+parseInt(serial)).update(
+                {
+                    IsFree: false,
+                    selected_QuesID:snap.child("question_id").val()
+                });
+            });
 
         $("#questions").append(row);
     });
