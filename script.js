@@ -1,28 +1,29 @@
-var app;
 var serial;
 
+// this chunk always runs when the window loads
+// $(function() {}) is a jQuery shorthand for $(document).ready()
 $(
     function()
     {
-        autostart();
+        setupFirebaseConnection();
         serial = getParameter("robot");
         if (serial != null)
         {
-            signup(serial);
+            signupToFirebase(serial);
             // setupParse();
-            // tnc(serial);
+            // termsNconditions(serial);
         }
         serial = getParameter("id");
         if (serial != null)
         {
-            setupParse();
-            tnc(serial);
+            termsNconditions(serial);
         }
     }
     //i dunno
 );
 
-function autostart()
+// connects the browsing session to the database for retrieval and submission
+function setupFirebaseConnection()
 {
     var config = {
         apiKey: "AIzaSyCSerWL0hXej5S9BWInzHwhl-ZxzKCpkLw",
@@ -35,10 +36,35 @@ function autostart()
     firebase.initializeApp(config);
 }
 
-function signup(serial)
+// autheticates the user so they can access the full webpage
+function signupToFirebase(serial)
 {
+    var jumbo = $("<div>",
+        {
+            class: "jumbotron text-center"
+        });
+    var logo = $("<img>",
+        {
+            src: "lionsbot.jpg",
+            class: "rounded mx-auto"
+        });
+    var spacer = "<br><br><br>";
+    var title = $("<h2>").html("Signup");
+    var widget = $("<div>",
+        {
+            id: "loginWidget"
+        });
 
-    var uiConfig = {
+    var content = jumbo.append(logo).append(spacer).append(title).append(spacer).append(widget);
+
+    $("body").html(jumbo);
+    createLoginWidget()
+}
+
+function createLoginWidget()
+{
+    var uiConfig =
+    {
         signInSuccessUrl: "?id=" + serial,
         signInOptions: [
             // Leave the lines as is for the providers you want to offer your users.
@@ -57,93 +83,64 @@ function signup(serial)
             window.location.assign("https://lionsbot.com");
         }
     };
-    var jumbo = $("<div>",
-    {
-        class: "jumbotron text-center"
-    }).append(
-        $("<img>",
-        {
-            src: "lionsbot.jpg",
-            class: "rounded mx-auto"
-        })
-    ).append(
-        "<br><br><br>"
-    ).append(
-        $("<h2>").html("Signup")
-    ).append(
-        "<br><br><br>"
-    ).append(
-        $("<div>",
-        {
-            id: "firebaseLogin"
-        })
-    )
-    $("body").html(jumbo);
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start('#firebaseLogin', uiConfig);
+    ui.start('#loginWidget', uiConfig);
 }
 
-function tnc(serial)
+// show the terms and conditions and if accepted, display all the robot information
+function termsNconditions(serial)
 {
     var jumbo = $("<div>",
     {
         class: "jumbotron text-center"
-    }).append(
-        $("<img>",
+    });
+    var logo = $("<img>",
         {
             src: "lionsbot.jpg",
             class: "rounded mx-auto"
-        })
-    ).append(
-        "<br><br><br>"
-    ).append(
-        $("<h2>").html("Terms & Conditions")
-    ).append(
-        "<br><br><br>"
-    ).append(
-        $("<p>").html("You agree to the following...")
-    ).append(
-        "<br><br><br>"
-    ).append(
-        $("<button>",
+        });
+    var spacer = "<br><br><br>";
+    var title = $("<h2>").html("Terms & Conditions");
+    var textwall = $("<p>").html("You agree to the following...");
+    var selectionRow = $("<div>",
+        {
+            class: "row"
+        });
+    var horizontalSpacer = "&emsp;&emsp;&emsp;";
+    var disagreeButton = $("<button>",
         {
             type: "button",
             class: "btn btn-danger"
-        }).html("I Do Not Agree").click(function()
-        {
-            window.location.replace("https://lionsbot.com");
-        })
-    ).append("&emsp;&emsp;&emsp;").append(
-        $("<button>",
+        }).html("I Do Not Agree");
+    var agreeButton = $("<button>",
         {
             type: "button",
             class: "btn btn-primary"
-        }).html("I Agree").click(function()
+        }).html("I Agree");
+
+    disagreeButton.click(function()
         {
-            // var email = $("#email").val();
-            // if (serial == null || email == "")
-            // {
-            // }
-            // else
-            // {
-            //     const Signup = Parse.Object.extend("Signup");
-            //     const signup = new Signup();
-            //     signup.set("email", email);
-            //     signup.save();
-            // }
+            window.location.replace("https://lionsbot.com");
+        });
+    agreeButton.click(function()
+        {
             showLoading();
-            getRobot(serial);
-        })
-    )
-    $("body").html(jumbo);
+            showRobot(serial);
+        });
+
+    var row = selectionRow.append(disagreeButton).append(horizontalSpacer).append(agreeButton);
+    var content = jumbo.append(logo).append(spacer).append(title).append(spacer).append(textwall).append(spacer).append(row);
+
+    $("body").html(content);
 }
 
 function showLoading()
 {
     var content = $("<div>",
-    {
-        class: "text-center"
-    }).html("Please wait...");
+        {
+            class: "text-center"
+        }).html("Please wait...");
+
     $("body").html(content);
 }
 
@@ -158,129 +155,29 @@ function getParameter(name, url)
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function setupParse()
-{
-    Parse.initialize("HNkVZTcZ4U0tuvAuONfVTb4kwmx5fLQEcFu3myCW", "LSELD53NxQqYeFfU0E1OFkfZpmpBCu8UiNZBiXer");
-    Parse.serverURL = "https://parseapi.back4app.com/";
-}
-
-async function getRobots()
-{
-    const robots = Parse.Object.extend("Robot");
-    const query = new Parse.Query(robots);
-    const results = await query.find();
-    fillTable(results);
-}
-
-async function getRobot(serial)
-{
-    const robots = Parse.Object.extend("Robot");
-    const query = new Parse.Query(robots);
-    query.equalTo("serial", serial)
-    const results = await query.find();
-    showRobot(results[0]);
-}
-
-function prettifyStatus(status)
-{
-    if (status == "Ready")
-    {
-        return "<span class='badge badge-success'>" + status + "</span>";
-    }
-    else if (status == "In Operation")
-    {
-        return "<span class='badge badge-primary'>" + status + "</span>";
-    }
-    else if (status == "Charging")
-    {
-        return "<span class='badge badge-warning'>" + status + "</span>";
-    }
-    else if (status == "Under Repairs")
-    {
-        return "<span class='badge badge-danger'>" + status + "</span>";
-    }
-    else
-    {
-        return "<span class='badge'>" + status + "</span>";
-    }
-}
-
 function selection(number)
 {
-    var mainShow = true;
+    var showMainContent = true;
     $(".textwall").each(function(index)
     {
         if (index == number)
         {
-
             if ($(this).is(":visible") == true)
             {
                 $(this).slideUp("fast", function()
-                {
-                    $("#mainContent").slideDown("fast");
-                });
+                { $("#mainContent").slideDown("fast"); });
             }
             else
             {
-                mainShow = false;
+                showMainContent = false;
                 $(this).slideDown("fast");
             }
-
-            // $("html, body").animate(
-            // {
-            //     'scrollTop':   $(this).offset().top
-            // }, 1000);
         }
         else
-        {
-            $(this).slideUp("fast");
-        }
+        { $(this).slideUp("fast"); }
     });
-    if (mainShow == false)
-    {
-        $("#mainContent").slideUp("fast");
-    }
-}
-
-function fillTable(results)
-{
-    function createColumns(titles)
-    {
-        var columns = [];
-        for (var i = 0; i < titles.length; i++)
-        {
-            columns.push($("<div>",
-            {
-                class: "col border"
-            }).html(titles[i]));
-        }
-        return columns
-    }
-    var table = $("<div>",
-    {
-        class: "container text-center align-middle"
-    });
-    var header = $("<div>",
-    {
-        class: "row bg-primary text-white"
-    });
-    header.html(createColumns(["Name", "Location", "Serial", "Status"]));
-    table.html(header);
-    for (var i = 0; i < results.length; i++)
-    {
-        var name = results[i].get("name");
-        var location = results[i].get("location");
-        var serial = results[i].get("serial");
-        var status = prettifyStatus(results[i].get("status"));
-        name = "<a href='?id=" + serial + "'>" + name + "</a>"
-        var row = $("<div>",
-        {
-            class: "row"
-        });
-        row.html(createColumns([name, location, serial, status]));
-        table.append(row);
-    }
-    $("body").html(table);
+    if (showMainContent == false)
+    { $("#mainContent").slideUp("fast"); }
 }
 
 function showRobot(robot)
@@ -375,6 +272,7 @@ function showRobot(robot)
             {
                 class: "col-3"
             }).append($("<p>").text(snap.child("question_id").val()));
+
 
         var question = $("<div>",
             {
