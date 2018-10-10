@@ -81,11 +81,11 @@
 }
 
 .policybox{
-    height: ;
     max-height: 60%;
+    max-width: auto;
     border:2px solid #ccc;
 
-    overflow:auto;
+    overflow: auto;
 }
 
 body{
@@ -103,3 +103,9 @@ body{
     background-color: transparent;
 }
 
+.bordering { 
+    border-style: solid;
+    border-color: black
+    border-width:5px;
+    border-radius: 6px;
+}

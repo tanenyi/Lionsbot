@@ -45,13 +45,14 @@ function signupToFirebase(serial)
             src: "lionsbot.png",
             class: "rounded mx-auto"
         });
-    var spacer = "<br><br><br>";
+    var spacer = "<br><br>";
+    var spacer2 = "<br>";
     var widget = $("<div>",
         {
             id: "loginWidget"
         });
 
-    var content = jumbo.append([logo, spacer, widget]);
+    var content = jumbo.append([spacer, logo, spacerx, widget]);
 
     $("body").html(jumbo);
     createLoginWidget()
@@ -92,7 +93,7 @@ function termsNconditions(serial)
     });
     var logo = $("<img>",
         {
-            src: "lionsbot.jpg",
+            src: "lionsbot.png",
             class: "rounded mx-auto"
         });
     var spacer = "<br><br>";
@@ -101,8 +102,9 @@ function termsNconditions(serial)
     var selectionRow = $("<div>",
         {
             class: "row justify-content-center policybox p-3 ml-4 mr-4"
-        }).html("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+        }).html("Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum hellooo thiiis issssssss teeeeeeeeeext to fill the space thanks and also this is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
     var horizontalSpacer = "&emsp;&emsp;&emsp;";
+    var explain = $("<h6>").html("(You'll have to agree in order to use our bots!)");
     var disagreeButton = $("<button>",
         {
             type: "button",
@@ -125,7 +127,7 @@ function termsNconditions(serial)
         });
 
     // var row = selectionRow.append([]);
-    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
+    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, explain, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
 
     $("body").html(content);
 }
@@ -395,8 +397,9 @@ function fillMainContent()
         });
     var photo = $("<img>",
         {
-            class: "card-img-top mx-auto",
-            src: "rotating.gif"
+            class: "card-img-top mx-auto bordering",
+            src: "rotating.gif",
+            border: "5"
         });
     var right = $("<div>",
         {
