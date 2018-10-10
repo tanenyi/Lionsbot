@@ -67,7 +67,7 @@ function createLoginWidget()
             // Leave the lines as is for the providers you want to offer your users.
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-            firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+            // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID,
             // firebase.auth.PhoneAuthProvider.PROVIDER_ID,
         ],
@@ -222,7 +222,7 @@ function createSuggestForm()
             class: "form-control",
             placeholder: "John Doe"
         });
-    var typeLabel = $("<label>").text("Question Type");
+    var typeLabel = $("<label>").text("Suggestion Type / Report");
     var typeInput = $("<select>",
         {
             id: "type",
@@ -241,9 +241,11 @@ function createSuggestForm()
             class: "btn btn-success"
         }).text("Submit");
 
-    for (var i = 0; i < 6; i++)
+    var options = ["Suggest questions", "Suggest answer", "Suggest song", "Suggest other ideas", "Report error"];
+
+    for (var i = 0; i < options.length; i++)
     {
-        typeInput.append("<option>" + i + "</option>");
+        typeInput.append("<option>" + options[i] + "</option>");
     }
 
     button.click(function()
