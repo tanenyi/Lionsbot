@@ -77,14 +77,14 @@
 
 .btnpolicyno
 {
-    background-color: red;
-    color: #fff;
+    background-color: red!important;
+    color: #fff!important;
 }
 
 .btnpolicyyes
 {
-    background-color: green;
-    color: #fff;
+    background-color: green!important;
+    color: #fff!important;
 
 }
 

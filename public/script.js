@@ -113,7 +113,7 @@ function termsNconditions(serial)
     var agreeButton = $("<button>",
         {
             type: "button",
-            class: "btn btn-primary waves-effect buttonpolicyyess"
+            class: "btn btn-primary waves-effect btnpolicyyes"
         }).html("I Agree");
 
     disagreeButton.click(function()
