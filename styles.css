@@ -61,3 +61,18 @@
 {
     color: #001E62
 }
+
+.btnpolicyyes
+{
+    color: green
+}
+
+.policybox{
+    height: 500px;
+    max-height: 100%;
+    width: 500px;
+    max-width: 100%;
+    border:2px solid #ccc;
+    font:16px/26px Georgia, Garamond, Serif;
+    overflow:auto;
+}
