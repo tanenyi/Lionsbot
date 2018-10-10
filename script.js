@@ -213,13 +213,13 @@ function createSuggestForm()
         {
             class: "form-group text-left"
         });
-    var emailLabel = $("<label>").text("Email Address");
-    var emailInput = $("<input>",
+    var nameLabel = $("<label>").text("Name");
+    var nameInput = $("<input>",
         {
-            id: "email",
-            type: "email",
+            id: "name",
+            type: "text",
             class: "form-control",
-            placeholder: "name@example.com"
+            placeholder: "John Doe"
         });
     var typeLabel = $("<label>").text("Question Type");
     var typeInput = $("<select>",
@@ -234,7 +234,7 @@ function createSuggestForm()
             class: "form-control",
             rows: "3"
         });
-    var spacer = "<br><br>"
+    var spacer = "<br>"
     var button = $("<button>",
         {
             class: "btn btn-success"
@@ -247,14 +247,21 @@ function createSuggestForm()
 
     button.click(function()
         {
-            database.ref('/suggestions').push({
-                email: $("#email").val(),
+            firebase.database().ref('/suggestions').push({
+                name: $("#name").val(),
+                email: firebase.auth().currentUser.email,
                 type: $("#type").val(),
                 text: $("#text").val(),
             });
+
+            $("#name").val("");
+            $("#type").val("");
+            $("#text").val("");
+
+            selection(1);
         });
 
-    let formContent = [emailLabel, emailInput, spacer, typeLabel, typeInput, spacer, textLabel, textInput];
+    let formContent = [nameLabel, nameInput, spacer, typeLabel, typeInput, spacer, textLabel, textInput];
 
     return [form.append([group.append(formContent)]), button];
 }
