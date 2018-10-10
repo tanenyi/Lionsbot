@@ -42,7 +42,7 @@ function signupToFirebase(serial)
         });
     var logo = $("<img>",
         {
-            src: "lionsbot.jpg",
+            src: "lionsbot.png",
             class: "rounded mx-auto"
         });
     var spacer = "<br><br><br>";
