@@ -336,15 +336,15 @@ function fillQuestions()
         var num = $("<div>",
             {
                 class: "col-3"
-            }).append($("<p>").text(snap.child("question_id").val()));
+            }).append($("<p>", { class: "my-auto" }).text(snap.child("question_id").val()));
         var question = $("<div>",
             {
                 class: "col-9"
-            }).append($("<p>").text(snap.child("name").val()));
+            }).append($("<p>", { class: "my-auto" }).text(snap.child("name").val()));
         var row = $("<div>",
             {
-                class: "row text-center"
-            }).append(num).append(question);
+                class: "row text-center border rounded bg-light"
+            }).append([num, question]);
 
         row.click(function()
             {

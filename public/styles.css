@@ -8,6 +8,11 @@
     height: 80%
 }
 
+.row.text-center.border.rounded
+{
+    margin-bottom: 15px;
+}
+
 #mainContent > .row
 {
     height: 50%
