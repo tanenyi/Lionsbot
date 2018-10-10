@@ -399,7 +399,6 @@ function fillMainContent()
         {
             class: "card-img-top mx-auto bordering",
             src: "rotating.gif",
-            border: "5"
         });
     var right = $("<div>",
         {
@@ -407,7 +406,7 @@ function fillMainContent()
         });
     var rightContent = $("<div>",
             {
-                class: "row socialIcons picadjust"
+                class: "row socialIcons"
             });
 
     photo.click(function()
@@ -415,11 +414,11 @@ function fillMainContent()
             $("#modal").modal("toggle");
         });
 
-    rightContent.append("<a href='https://lionsbot.com'><i class='fab fa-facebook fa-4x'></i></a>");
-    rightContent.append("<br>");
+    rightContent.append("<a href='https://lionsbot.com'><img src=newtwitter.png></img></a>");
+    rightContent.append("<br><br>");
     rightContent.append("<a href='https://lionsbot.com'><img src=bestfb.png></img></a>");
-    rightContent.append("<br>");;
-    rightContent.append("<a href='https://lionsbot.com'><i class='fas fa-share-square fa-4x'></i></a>");
+    rightContent.append("<br><br>");;
+    rightContent.append("<a href='https://lionsbot.com'><img src=web.png class=social></img></a>");
 
     $("#mainContent").append(row.append([left, center.append(photo), right.append(rightContent)]));
 }
