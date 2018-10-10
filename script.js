@@ -10,8 +10,6 @@ $(
         if (serial != null)
         {
             signupToFirebase(serial);
-            // setupParse();
-            // termsNconditions(serial);
         }
         serial = getParameter("id");
         if (serial != null)
@@ -19,7 +17,6 @@ $(
             termsNconditions(serial);
         }
     }
-    //i dunno
 );
 
 // connects the browsing session to the database for retrieval and submission
@@ -190,7 +187,7 @@ function createInteractCard()
         {
             class: "card-header"
         });
-    var interactTitle = $("<h4>").html("Interact" + "&emsp;&emsp;<i class='fas fa-hand-point-up'></i>");
+    var interactTitle = $("<h4>");
     var interactContent = $("<div>",
         {
             id: "questions",
@@ -202,6 +199,10 @@ function createInteractCard()
             selection(0);
         });
 
+    interactTitle.append("Interact");
+    interactTitle.append("&emsp;&emsp;");
+    interactTitle.append("<i class='fas fa-hand-point-up'></i>");
+
     return interactCard.append([interactHeader.append(interactTitle), interactContent]);
 }
 
@@ -210,7 +211,7 @@ function createSuggestForm()
     var form = $("<div>");
     var group = $("<div>",
         {
-            class: "form-group"
+            class: "form-group text-left"
         });
     var emailLabel = $("<label>").text("Email Address");
     var emailInput = $("<input>",
@@ -233,6 +234,7 @@ function createSuggestForm()
             class: "form-control",
             rows: "3"
         });
+    var spacer = "<br><br>"
     var button = $("<button>",
         {
             class: "btn btn-success"
@@ -252,7 +254,9 @@ function createSuggestForm()
             });
         });
 
-    return [form.append([group.append([emailLabel, emailInput]), group.append([typeLabel, typeInput]), group.append([textLabel, textInput])]), button];
+    let formContent = [emailLabel, emailInput, spacer, typeLabel, typeInput, spacer, textLabel, textInput];
+
+    return [form.append([group.append(formContent)]), button];
 }
 
 function createSuggestCard()
@@ -265,8 +269,7 @@ function createSuggestCard()
         {
             class: "card-header"
         });
-    var suggestTitle = $("<h4>").html("Suggest" + "&emsp;&emsp;<i class='far fa-comment'></i>");
-    // TODO: need to make a bootstrap form here
+    var suggestTitle = $("<h4>");
     var suggestContent = $("<div>",
         {
             class: "card-body textwall"
@@ -276,6 +279,10 @@ function createSuggestCard()
         {
             selection(1);
         });
+
+    suggestTitle.append("Suggest");
+    suggestTitle.append("&emsp;&emsp;");
+    suggestTitle.append("<i class='far fa-comment'></i>");
 
     return suggestCard.append([suggestHeader.append(suggestTitle), suggestContent.append(createSuggestForm())]);
 }
@@ -290,16 +297,28 @@ function createAboutCard()
         {
             class: "card-header"
         });
-    var aboutTitle = $("<h4>").html("About" + "&emsp;&emsp;<i class='fas fa-info-circle'></i>");
+    var aboutTitle = $("<h4>");
     var aboutContent = $("<div>",
         {
             class: "card-body textwall"
-        }).html("Made on 27th September 2018\nCourtesy of Lionsbot\n\nFind out more on our website!");
+        });
 
     aboutHeader.click(function()
         {
             selection(2);
         });
+
+    aboutTitle.append("About");
+    aboutTitle.append("&emsp;&emsp;");
+    aboutTitle.append("<i class='fas fa-info-circle'></i>");
+
+    aboutContent.append("Made on 27th September 2018");
+    aboutContent.append("<br><br>");
+    aboutContent.append("Courtesy of Lionsbot");
+    aboutContent.append("<br><br>");
+    aboutContent.append("Find out more on our website!");
+    aboutContent.append("<br><br>");
+    aboutContent.append("<a href='https://lionsbot.com'><i class='fas fa-globe-americas fa-4x'></i></a>");
 
     return aboutCard.append([aboutHeader.append(aboutTitle), aboutContent]);
 }
@@ -339,25 +358,17 @@ function fillIntro()
     data.on("child_added", function(word)
     {
         robotName = word.child("name").val();
-        var name = $("<div>",
-            {
-                class: "row"
-            }).append($("<h3>").text(robotName));
-        var type = $("<div>",
-            {
-                class: "row"
-            }).append($("<p>").text(word.child("type").val()));
-        var character = $("<div>",
-            {
-                class: "row"
-            }).append($("<p>").text(word.child("character").val()));
-        var col = $("<div>",
-            {
-                class: "col"
-            }).append(name).append(type).append(character);
+
+        var content = $("<div>");
+        content.append($("<h4>", { class: "text-center" }).append(robotName));
+        content.append("<br>");
+        content.append($("<p>", { class: "text-center" }).append(word.child("type").val()));
+        content.append("<br>");
+        content.append($("<p>", { class: "text-center" }).append(word.child("character").val()));
+        content.append("<br>");
 
         $("#robotName").append($("<h3>").text(robotName));
-        $("#intro").append(col);
+        $("#intro").append(content);
     });
 }
 
@@ -379,7 +390,7 @@ function fillMainContent()
     var photo = $("<img>",
         {
             class: "card-img-top mx-auto",
-            src: "rotating.gif"//robot.get("image").url()
+            src: "rotating.gif"
         });
     var right = $("<div>",
         {
@@ -395,7 +406,11 @@ function fillMainContent()
             $("#modal").modal("toggle");
         });
 
-    rightContent.html("<i class='fab fa-facebook fa-4x'></i><br><i class='fab fa-twitter fa-4x'></i><br><i class='fas fa-share-square fa-4x'></i>");
+    rightContent.append("<a href='https://lionsbot.com'><i class='fab fa-facebook fa-4x'></i></a>");
+    rightContent.append("<br>");
+    rightContent.append("<a href='https://lionsbot.com'><i class='fab fa-twitter fa-4x'></i></a>");
+    rightContent.append("<br>");;
+    rightContent.append("<a href='https://lionsbot.com'><i class='fas fa-share-square fa-4x'></i></a>");
 
     $("#mainContent").append(row.append([left, center.append(photo), right.append(rightContent)]));
 }
@@ -455,7 +470,41 @@ function showModal()
     var body = $("<div>",
         {
             class: "modal-body"
-        }).html("Model number<br>Dimensions (product): 735(L) x 630(W) x 1100(H)<br>Scrubbing width	: 450mm (2x 9 inch)<br>Brush Pressure	: 50Kg, 63 g/cm2<br>Solution Tank	: 35L<br>Recovery Tank	: 35L<br>Z water Cartridge	: 2L<br>Noise Level	: 59dB /cm2<br>Max cleaning coverage	: 1600m2/hr<br>Turning radius		: 870mm full turn<br>Cleaning speed	: 0.5 - 1m/s<br>Movement speed	: 0.2 - 2m/s<br>Battery Specs	: 24V 120Ah LiFePO4<br>Time to full charge	: 2 Hrs<br>Running time	: 3 Hrs<br>Weight of machine (max): 220Kg<br>Connectivity: 3G / 4G, Wifi");
+        });
+
+    body.append("Model number");
+    body.append("<br>");
+    body.append("Dimensions (product): 735(L) x 630(W) x 1100(H)");
+    body.append("<br>");
+    body.append("Scrubbing width&emsp;: 450mm (2x 9 inch)");
+    body.append("<br>");
+    body.append("Brush Pressure&emsp;: 50Kg, 63 g/cm2");
+    body.append("<br>");
+    body.append("Solution Tank&emsp;: 35L");
+    body.append("<br>");
+    body.append("Recovery Tank&emsp;: 35L");
+    body.append("<br>");
+    body.append("Z water Cartridge&emsp;: 2L");
+    body.append("<br>");
+    body.append("Noise Level&emsp;: 59dB /cm2");
+    body.append("<br>");
+    body.append("Max cleaning coverage&emsp;: 1600m2/hr");
+    body.append("<br>");
+    body.append("Turning radius&emsp;&emsp;: 870mm full turn");
+    body.append("<br>");
+    body.append("Cleaning speed&emsp;: 0.5 - 1m/s");
+    body.append("<br>");
+    body.append("Movement speed&emsp;: 0.2 - 2m/s");
+    body.append("<br>");
+    body.append("Battery Specs&emsp;: 24V 120Ah LiFePO4");
+    body.append("<br>");
+    body.append("Time to full charge&emsp;: 2 Hrs");
+    body.append("<br>");
+    body.append("Running time&emsp;: 3 Hrs");
+    body.append("<br>");
+    body.append("Weight of machine (max): 220Kg");
+    body.append("<br>");
+    body.append("Connectivity: 3G / 4G, Wifi");;
 
     var content = modal.append(dialog.append(content.append(header).append(body)));
 
