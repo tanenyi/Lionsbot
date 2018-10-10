@@ -407,7 +407,7 @@ function fillMainContent()
         });
     var rightContent = $("<div>",
             {
-                class: "row socialIcons"
+                class: "row socialIcons picadjust"
             });
 
     photo.click(function()
@@ -417,7 +417,7 @@ function fillMainContent()
 
     rightContent.append("<a href='https://lionsbot.com'><i class='fab fa-facebook fa-4x'></i></a>");
     rightContent.append("<br>");
-    rightContent.append("<a href='https://lionsbot.com'><i class='fab fa-twitter fa-4x'></i></a>");
+    rightContent.append("<a href='https://lionsbot.com'><img src=bestfb.png></img></a>");
     rightContent.append("<br>");;
     rightContent.append("<a href='https://lionsbot.com'><i class='fas fa-share-square fa-4x'></i></a>");
 

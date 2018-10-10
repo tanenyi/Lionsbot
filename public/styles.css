@@ -105,7 +105,13 @@ body{
 
 .bordering { 
     border-style: solid;
-    border-color: black
     border-width:5px;
-    border-radius: 6px;
+    border-radius: 80px;
+}
+
+.picadjust{
+    
+    max-height: 30px;
+    width: auto;
+    max-width: 30px
 }
