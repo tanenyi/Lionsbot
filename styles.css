@@ -1,0 +1,63 @@
+.jumbotron > img, #mainContent > img
+{
+    max-width: 20%;
+    max-height: 100%
+}
+
+.card-img-top{
+    height: 80%
+}
+
+#mainContent > .row
+{
+    height: 50%
+}
+
+@media (min-width: 200px)
+{
+    h3
+    {
+        font-size: 2em;
+        text-align: center;
+    }
+    h4
+    {
+        font-size: 1.5em;
+        font-weight: bolder;
+    }
+    p
+    {
+        font-size: 1.25em
+    }
+}
+
+/* #questions
+{
+    max-height: 70%;
+    overflow: auto
+} */
+
+.socialIcons
+{
+    display: inline-block;
+}
+
+.fa-green
+{
+    color: #001E62
+}
+
+.fa-red
+{
+    color: #001E62
+}
+
+.fa-orange
+{
+    color: #001E62
+}
+
+.fa-yellow
+{
+    color: #001E62
+}
