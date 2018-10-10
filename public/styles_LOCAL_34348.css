@@ -5,12 +5,18 @@
 }
 
 .card-img-top{
-    height: 100%
+    height: 80%
 }
 
 .row.text-center.border.rounded
 {
     margin-bottom: 15px;
+}
+
+.card-header
+{
+    background-color: #001E62;
+    color: #FFFFFF;
 }
 
 #mainContent > .row
@@ -103,13 +109,15 @@ body{
     background-color: transparent;
 }
 
-.bordering { 
+.bordering {
     border-style: solid;
     border-width:5px;
     border-radius: 80px;
 }
 
-.social{
-    height:64px;
-    width:64px;
+.picadjust{
+
+    max-height: 30px;
+    width: auto;
+    max-width: 30px
 }
