@@ -38,7 +38,7 @@ function signupToFirebase(serial)
 {
     var jumbo = $("<div>",
         {
-            class: "jumbotron text-center"
+            class: "jumbotron text-center seethrough"
         });
     var logo = $("<img>",
         {
@@ -46,13 +46,12 @@ function signupToFirebase(serial)
             class: "rounded mx-auto"
         });
     var spacer = "<br><br><br>";
-    var title = $("<h2>").html("Signup");
     var widget = $("<div>",
         {
             id: "loginWidget"
         });
 
-    var content = jumbo.append([logo, spacer, title, spacer, widget]);
+    var content = jumbo.append([logo, spacer, widget]);
 
     $("body").html(jumbo);
     createLoginWidget()
@@ -107,11 +106,11 @@ function termsNconditions(serial)
     var disagreeButton = $("<button>",
         {
             type: "button",
-            class: "btn btnpolicyyes"
+            class: "btn btnpolicyno"
         }).html("I Do Not Agree");
     var agreeButton = $("<button>",
         {
-            type: "button",
+            type: "buttonpolicyyess",
             class: "btn btn-primary"
         }).html("I Agree");
 
@@ -431,11 +430,11 @@ function showRobot(robot)
     var mainContent = $("<div>",
         {
             id: "mainContent",
-            class: "card"
+            class: "card seethrough"
         });
     var accordion = $("<div>",
         {
-            class: "accordion"
+            class: "accordion col-6 offset-3"
         });
 
     var selection = accordion.append([createInteractCard(), createSuggestCard(), createAboutCard()]);
