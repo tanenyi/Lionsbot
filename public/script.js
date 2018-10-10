@@ -384,10 +384,6 @@ function fillIntro()
 
 function fillMainContent()
 {
-    var row = $("<div>",
-        {
-            class: "row align-items-center"
-        });
     var left = $("<div>",
         {
             id: "intro",
@@ -422,7 +418,7 @@ function fillMainContent()
     rightContent.append("<br><br>");;
     rightContent.append("<a href='https://lionsbot.com'><img src=web.png class=social></img></a>");
 
-    $("#mainContent").append(row.append([left, center.append(photo), right.append(rightContent)]));
+    $("#mainContent").append([left, center.append(photo), right.append(rightContent)]);
 }
 
 function showRobot(robot)
