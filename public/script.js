@@ -107,11 +107,11 @@ function termsNconditions(serial)
     var disagreeButton = $("<button>",
         {
             type: "button",
-            class: "btn btnpolicyyes"
+            class: "btn btnpolicyno"
         }).html("I Do Not Agree");
     var agreeButton = $("<button>",
         {
-            type: "button",
+            type: "buttonpolicyyess",
             class: "btn btn-primary"
         }).html("I Agree");
 
@@ -431,7 +431,7 @@ function showRobot(robot)
     var mainContent = $("<div>",
         {
             id: "mainContent",
-            class: "card"
+            class: "card seethrough"
         });
     var accordion = $("<div>",
         {
