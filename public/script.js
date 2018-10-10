@@ -9,7 +9,7 @@ $(
         serial = getParameter("robot");
         if (serial != null)
         {
-            signupToFirebase(serial);
+            signupToFirebase();
         }
         serial = getParameter("id");
         if (serial != null)
@@ -34,7 +34,7 @@ function setupFirebaseConnection()
 }
 
 // autheticates the user so they can access the full webpage
-function signupToFirebase(serial)
+function signupToFirebase()
 {
     var jumbo = $("<div>",
         {
@@ -52,7 +52,7 @@ function signupToFirebase(serial)
             id: "loginWidget"
         });
 
-    var content = jumbo.append([spacer, logo, spacerx, widget]);
+    var content = jumbo.append([spacer, logo, spacer2, widget]);
 
     $("body").html(jumbo);
     createLoginWidget()
