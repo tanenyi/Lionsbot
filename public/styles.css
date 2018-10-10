@@ -61,3 +61,25 @@
 {
     color: yellow
 }
+
+.btnpolicyno
+{
+    color: red
+
+}
+
+.btnpolicyyes
+{
+    color: green
+
+}
+
+.policybox{
+    height: 500px;
+    max-height: 100%;
+    width:80%;
+    border:2px solid #ccc;
+    font:16px/26px Georgia, Garamond, Serif;
+    overflow:auto;
+}
+
