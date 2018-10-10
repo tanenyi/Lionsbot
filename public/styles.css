@@ -75,7 +75,7 @@
 
 .btnpolicyyes
 {
-    color: green
+    : green
 
 }
 
@@ -87,5 +87,9 @@
     border:2px solid #ccc;
     font:16px/26px Georgia, Garamond, Serif;
     overflow:auto;
+}
+
+body{
+
 }
 
