@@ -96,6 +96,7 @@ function termsNconditions(serial)
             class: "rounded mx-auto"
         });
     var spacer = "<br><br>";
+    var spacerbtn = "<br>";
     var title = $("<h2>").html("Terms & Conditions");
     var selectionRow = $("<div>",
         {
@@ -124,7 +125,7 @@ function termsNconditions(serial)
         });
 
     // var row = selectionRow.append([]);
-    var content = jumbo.append([logo, spacer, title, selectionRow, disagreeButton, horizontalSpacer, agreeButton]);
+    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
 
     $("body").html(content);
 }
