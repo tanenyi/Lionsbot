@@ -107,7 +107,7 @@ function termsNconditions(serial)
     var disagreeButton = $("<button>",
         {
             type: "button",
-            class: "btn btn-danger"
+            class: "btn btnpolicyyes"
         }).html("I Do Not Agree");
     var agreeButton = $("<button>",
         {
