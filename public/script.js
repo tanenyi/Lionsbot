@@ -346,7 +346,7 @@ function fillQuestions()
             }).append($("<p>", { class: "my-auto" }).text(snap.child("name").val()));
         var row = $("<div>",
             {
-                class: "row text-center border rounded bg-light"
+                class: "row text-center bottom-border"
             }).append([num, question]);
 
         row.click(function()
@@ -438,7 +438,7 @@ function showRobot(robot)
         });
     var accordion = $("<div>",
         {
-            class: "accordion col-6 offset-3"
+            class: "accordion col-8 offset-2"
         });
 
     accordion.append([createInteractCard(), "<br>", createSuggestCard(), "<br>", createAboutCard()]);
