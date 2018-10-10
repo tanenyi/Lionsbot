@@ -8,17 +8,9 @@
     height: 100%
 }
 
-.row.text-center
+.row.text-center.border.rounded
 {
-    margin-bottom: 3px;
-    padding: 10px;
-}
-
-#questions
-{
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 0;
+    margin-bottom: 15px;
 }
 
 #mainContent > .row
@@ -78,7 +70,7 @@
 .btnpolicyno
 {
     background-color: red;
-    color: #fff;
+
 }
 
 .btnpolicyyes
@@ -111,7 +103,7 @@ body{
     background-color: transparent;
 }
 
-.bordering {
+.bordering { 
     border-style: solid;
     border-width:5px;
     border-radius: 80px;
@@ -120,22 +112,4 @@ body{
 .social{
     height:64px;
     width:64px;
-}
-
-.bottom-border
-{
-    border-bottom: 1px solid #d3d3d3;
-
-}
-
-.bottom-border:last-of-type
-{
-    border-bottom: 0px;
-}
-
-
-.card-header
-{
-    background-color: #001E62;
-    color: #FFFFFF;
 }

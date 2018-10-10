@@ -38,21 +38,21 @@ function signupToFirebase(serial)
 {
     var jumbo = $("<div>",
         {
-            class: "jumbotron text-center"
+            class: "jumbotron text-center seethrough"
         });
     var logo = $("<img>",
         {
-            src: "lionsbot.jpg",
+            src: "lionsbot.png",
             class: "rounded mx-auto"
         });
-    var spacer = "<br><br><br>";
-    var title = $("<h2>").html("Signup");
+    var spacer = "<br><br>";
+    var spacer2 = "<br>";
     var widget = $("<div>",
         {
             id: "loginWidget"
         });
 
-    var content = jumbo.append([logo, spacer, title, spacer, widget]);
+    var content = jumbo.append([spacer, logo, spacerx, widget]);
 
     $("body").html(jumbo);
     createLoginWidget()
@@ -67,7 +67,7 @@ function createLoginWidget()
             // Leave the lines as is for the providers you want to offer your users.
             firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-            firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+            // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID,
             // firebase.auth.PhoneAuthProvider.PROVIDER_ID,
         ],
@@ -89,29 +89,30 @@ function termsNconditions(serial)
 {
     var jumbo = $("<div>",
     {
-        class: "jumbotron text-center"
+        class: "jumbotron text-center seethrough"
     });
     var logo = $("<img>",
         {
-            src: "lionsbot.jpg",
+            src: "lionsbot.png",
             class: "rounded mx-auto"
         });
-    var spacer = "<br><br><br>";
+    var spacer = "<br><br>";
+    var spacerbtn = "<br>";
     var title = $("<h2>").html("Terms & Conditions");
-    var textwall = $("<p>").html("You agree to the following...");
     var selectionRow = $("<div>",
         {
-            class: "row justify-content-center"
-        });
+            class: "row justify-content-center policybox p-3 ml-4 mr-4"
+        }).html("Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum hellooo thiiis issssssss teeeeeeeeeext to fill the space thanks and also this is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
     var horizontalSpacer = "&emsp;&emsp;&emsp;";
+    var explain = $("<h6>").html("(You'll have to agree in order to use our bots!)");
     var disagreeButton = $("<button>",
         {
             type: "button",
-            class: "btn btn-danger"
+            class: "btn btnpolicyno"
         }).html("I Do Not Agree");
     var agreeButton = $("<button>",
         {
-            type: "button",
+            type: "buttonpolicyyess",
             class: "btn btn-primary"
         }).html("I Agree");
 
@@ -125,8 +126,8 @@ function termsNconditions(serial)
             showRobot(serial);
         });
 
-    var row = selectionRow.append([disagreeButton, horizontalSpacer, agreeButton]);
-    var content = jumbo.append([logo, spacer, title, spacer, textwall, spacer, row]);
+    // var row = selectionRow.append([]);
+    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, explain, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
 
     $("body").html(content);
 }
@@ -201,7 +202,7 @@ function createInteractCard()
 
     interactTitle.append("Interact");
     interactTitle.append("&emsp;&emsp;");
-    interactTitle.append("<i class='fas fa-hand-point-up'></i>");
+    interactTitle.append("<img src='interact.png'></img>");
 
     return interactCard.append([interactHeader.append(interactTitle), interactContent]);
 }
@@ -221,7 +222,7 @@ function createSuggestForm()
             class: "form-control",
             placeholder: "John Doe"
         });
-    var typeLabel = $("<label>").text("Question Type");
+    var typeLabel = $("<label>").text("Suggestion Type / Report");
     var typeInput = $("<select>",
         {
             id: "type",
@@ -240,9 +241,11 @@ function createSuggestForm()
             class: "btn btn-success"
         }).text("Submit");
 
-    for (var i = 0; i < 6; i++)
+    var options = ["Suggest questions", "Suggest answer", "Suggest song", "Suggest other ideas", "Report error"];
+
+    for (var i = 0; i < options.length; i++)
     {
-        typeInput.append("<option>" + i + "</option>");
+        typeInput.append("<option>" + options[i] + "</option>");
     }
 
     button.click(function()
@@ -289,7 +292,7 @@ function createSuggestCard()
 
     suggestTitle.append("Suggest");
     suggestTitle.append("&emsp;&emsp;");
-    suggestTitle.append("<i class='far fa-comment'></i>");
+    suggestTitle.append("<img src='suggest.png'></img>");
 
     return suggestCard.append([suggestHeader.append(suggestTitle), suggestContent.append(createSuggestForm())]);
 }
@@ -317,7 +320,7 @@ function createAboutCard()
 
     aboutTitle.append("About");
     aboutTitle.append("&emsp;&emsp;");
-    aboutTitle.append("<i class='fas fa-info-circle'></i>");
+    aboutTitle.append("<img src='about.png'></img>");
 
     aboutContent.append("Made on 27th September 2018");
     aboutContent.append("<br><br>");
@@ -343,7 +346,7 @@ function fillQuestions()
             }).append($("<p>", { class: "my-auto" }).text(snap.child("name").val()));
         var row = $("<div>",
             {
-                class: "row text-center border rounded bg-light"
+                class: "row text-center bottom-border"
             }).append([num, question]);
 
         row.click(function()
@@ -367,12 +370,12 @@ function fillIntro()
         robotName = word.child("name").val();
 
         var content = $("<div>");
+        content.append("<br>");
         content.append($("<h4>", { class: "text-center" }).append(robotName));
         content.append("<br>");
         content.append($("<p>", { class: "text-center" }).append(word.child("type").val()));
         content.append("<br>");
         content.append($("<p>", { class: "text-center" }).append(word.child("character").val()));
-        content.append("<br>");
 
         $("#robotName").append($("<h3>").text(robotName));
         $("#intro").append(content);
@@ -396,8 +399,8 @@ function fillMainContent()
         });
     var photo = $("<img>",
         {
-            class: "card-img-top mx-auto",
-            src: "rotating.gif"
+            class: "card-img-top mx-auto bordering",
+            src: "rotating.gif",
         });
     var right = $("<div>",
         {
@@ -413,11 +416,11 @@ function fillMainContent()
             $("#modal").modal("toggle");
         });
 
-    rightContent.append("<a href='https://lionsbot.com'><i class='fab fa-facebook fa-4x'></i></a>");
-    rightContent.append("<br>");
-    rightContent.append("<a href='https://lionsbot.com'><i class='fab fa-twitter fa-4x'></i></a>");
-    rightContent.append("<br>");;
-    rightContent.append("<a href='https://lionsbot.com'><i class='fas fa-share-square fa-4x'></i></a>");
+    rightContent.append("<a href='https://lionsbot.com'><img src=newtwitter.png></img></a>");
+    rightContent.append("<br><br>");
+    rightContent.append("<a href='https://lionsbot.com'><img src=bestfb.png></img></a>");
+    rightContent.append("<br><br>");;
+    rightContent.append("<a href='https://lionsbot.com'><img src=web.png class=social></img></a>");
 
     $("#mainContent").append(row.append([left, center.append(photo), right.append(rightContent)]));
 }
@@ -431,16 +434,16 @@ function showRobot(robot)
     var mainContent = $("<div>",
         {
             id: "mainContent",
-            class: "card"
+            class: "card seethrough"
         });
     var accordion = $("<div>",
         {
-            class: "accordion"
+            class: "accordion col-8 offset-2"
         });
 
-    var selection = accordion.append([createInteractCard(), createSuggestCard(), createAboutCard()]);
+    accordion.append([createInteractCard(), "<br>", createSuggestCard(), "<br>", createAboutCard()]);
 
-    $("body").html(content.append([mainContent, selection]));
+    $("body").html(content.append([mainContent, "<br>", accordion]));
     $(".textwall").hide();
 
     fillQuestions();
