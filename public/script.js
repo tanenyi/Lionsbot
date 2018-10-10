@@ -370,12 +370,12 @@ function fillIntro()
         robotName = word.child("name").val();
 
         var content = $("<div>");
+        content.append("<br>");
         content.append($("<h4>", { class: "text-center" }).append(robotName));
         content.append("<br>");
         content.append($("<p>", { class: "text-center" }).append(word.child("type").val()));
         content.append("<br>");
         content.append($("<p>", { class: "text-center" }).append(word.child("character").val()));
-        content.append("<br>");
 
         $("#robotName").append($("<h3>").text(robotName));
         $("#intro").append(content);
