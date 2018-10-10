@@ -75,7 +75,8 @@
 
 .btnpolicyyes
 {
-    : green
+    background-color: green;
+    color: #fff;
 
 }
 
@@ -90,6 +91,8 @@
 }
 
 body{
+
+    background: linear-gradient(to bottom, #ffffff 0%, #98a4ae 100%);
 
 }
 
