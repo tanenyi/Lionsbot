@@ -186,7 +186,7 @@ function createInteractCard()
         });
     var interactHeader = $("<div>",
         {
-            class: "card-header"
+            class: "card-header waves-effect waves-light"
         });
     var interactTitle = $("<h4>");
     var interactContent = $("<div>",
@@ -238,7 +238,7 @@ function createSuggestForm()
     var spacer = "<br>"
     var button = $("<button>",
         {
-            class: "btn btn-success"
+            class: "btn btn-success waves-effect"
         }).text("Submit");
 
     var options = ["Suggest questions", "Suggest answer", "Suggest song", "Suggest other ideas", "Report error"];
@@ -277,7 +277,7 @@ function createSuggestCard()
         });
     var suggestHeader = $("<div>",
         {
-            class: "card-header"
+            class: "card-header waves-effect waves-light"
         });
     var suggestTitle = $("<h4>");
     var suggestContent = $("<div>",
@@ -305,7 +305,7 @@ function createAboutCard()
         });
     var aboutHeader = $("<div>",
         {
-            class: "card-header"
+            class: "card-header waves-effect waves-light"
         });
     var aboutTitle = $("<h4>");
     var aboutContent = $("<div>",
@@ -346,7 +346,7 @@ function fillQuestions()
             }).append($("<p>", { class: "my-auto" }).text(snap.child("name").val()));
         var row = $("<div>",
             {
-                class: "row text-center bottom-border"
+                class: "row text-center bottom-border waves-effect"
             }).append([num, question]);
 
         row.click(function()
@@ -399,7 +399,7 @@ function fillMainContent()
         });
     var photo = $("<img>",
         {
-            class: "card-img-top mx-auto bordering",
+            class: "card-img-top mx-auto bordering waves-effect waves-light",
             src: "rotating.gif",
         });
     var right = $("<div>",
@@ -434,7 +434,7 @@ function showRobot(robot)
     var mainContent = $("<div>",
         {
             id: "mainContent",
-            class: "card seethrough"
+            class: "row seethrough align-items-center"
         });
     var accordion = $("<div>",
         {
@@ -457,7 +457,7 @@ function showModal()
     var modal = $("<div>",
         {
             id: "modal",
-            class: "modal fade",
+            class: "modal fade waves-effect",
             tabindex: "-1",
             role: "dialog",
             ariaLabelledby: "exampleModalLabel",
