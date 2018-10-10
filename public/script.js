@@ -202,7 +202,7 @@ function createInteractCard()
 
     interactTitle.append("Interact");
     interactTitle.append("&emsp;&emsp;");
-    interactTitle.append("<i class='fas fa-hand-point-up'></i>");
+    interactTitle.append("<img src='interact.png'></img>");
 
     return interactCard.append([interactHeader.append(interactTitle), interactContent]);
 }
@@ -292,7 +292,7 @@ function createSuggestCard()
 
     suggestTitle.append("Suggest");
     suggestTitle.append("&emsp;&emsp;");
-    suggestTitle.append("<i class='far fa-comment'></i>");
+    suggestTitle.append("<img src='suggest.png'></img>");
 
     return suggestCard.append([suggestHeader.append(suggestTitle), suggestContent.append(createSuggestForm())]);
 }
@@ -320,7 +320,7 @@ function createAboutCard()
 
     aboutTitle.append("About");
     aboutTitle.append("&emsp;&emsp;");
-    aboutTitle.append("<i class='fas fa-info-circle'></i>");
+    aboutTitle.append("<img src='about.png'></img>");
 
     aboutContent.append("Made on 27th September 2018");
     aboutContent.append("<br><br>");
@@ -442,9 +442,9 @@ function showRobot(robot)
             class: "accordion col-6 offset-3"
         });
 
-    var selection = accordion.append([createInteractCard(), createSuggestCard(), createAboutCard()]);
+    accordion.append([createInteractCard(), "<br>", createSuggestCard(), "<br>", createAboutCard()]);
 
-    $("body").html(content.append([mainContent, selection]));
+    $("body").html(content.append([mainContent, "<br>", accordion]));
     $(".textwall").hide();
 
     fillQuestions();
