@@ -69,7 +69,7 @@
 
 .btnpolicyno
 {
-    color: red
+    background-color: red;
 
 }
 
@@ -81,12 +81,10 @@
 }
 
 .policybox{
-    height: 500px;
-    max-height: 100%;
-    width: 500px;
-    max-width: 100%;
+    height: ;
+    max-height: 60%;
     border:2px solid #ccc;
-    font:16px/26px Georgia, Garamond, Serif;
+
     overflow:auto;
 }
 

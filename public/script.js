@@ -88,20 +88,19 @@ function termsNconditions(serial)
 {
     var jumbo = $("<div>",
     {
-        class: "jumbotron text-center"
+        class: "jumbotron text-center seethrough"
     });
     var logo = $("<img>",
         {
             src: "lionsbot.jpg",
             class: "rounded mx-auto"
         });
-    var spacer = "<br><br><br>";
+    var spacer = "<br><br>";
     var title = $("<h2>").html("Terms & Conditions");
-    var textwall = $("<p>").html("You agree to the following...");
     var selectionRow = $("<div>",
         {
-            class: "row justify-content-center"
-        });
+            class: "row justify-content-center policybox p-3 ml-4 mr-4"
+        }).html("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
     var horizontalSpacer = "&emsp;&emsp;&emsp;";
     var disagreeButton = $("<button>",
         {
@@ -124,8 +123,8 @@ function termsNconditions(serial)
             showRobot(serial);
         });
 
-    var row = selectionRow.append([disagreeButton, horizontalSpacer, agreeButton]);
-    var content = jumbo.append([logo, spacer, title, spacer, textwall, spacer, row]);
+    // var row = selectionRow.append([]);
+    var content = jumbo.append([logo, spacer, title, selectionRow, disagreeButton, horizontalSpacer, agreeButton]);
 
     $("body").html(content);
 }
