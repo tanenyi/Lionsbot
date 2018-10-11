@@ -443,9 +443,9 @@ function showRobot(robot)
     $(".textwall").hide();
 
     fillQuestions();
-    fillIntro();
     fillMainContent();
     showModal();
+    fillIntro();
 }
 
 function showModal()
