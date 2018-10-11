@@ -115,22 +115,6 @@ function termsNconditions(serial)
             type: "button",
             class: "btn btn-primary waves-effect btnpolicyyes"
         }).html("I Agree");
-    var form = $("<div>",
-        {
-            class: "col-4 offset-4"
-        });
-    var group = $("<div>",
-        {
-            class: "form-group"
-        });
-    var keyLabel = $("<label>").html("Authetication Key<br>From Robot");
-    var keyInput = $("<input>",
-        {
-            id: "key",
-            type: "text",
-            class: "form-control text-center",
-            placeholder: "XXXX"
-        });
 
     disagreeButton.click(function()
         {
@@ -138,27 +122,12 @@ function termsNconditions(serial)
         });
     agreeButton.click(function()
         {
-            var data = firebase.database().ref("robots").orderByKey().equalTo(String(parseInt(serial)))
-            data.on("child_added", function(word)
-            {
-                if ($("#key").val() == word.child("key").val())
-                {
-                    showLoading();
-                    showRobot(serial);
-                }
-                else
-                {
-                    $("#key").val("");
-                    alert("Wrong key");
-                }
-            });
-
+            showLoading();
+            showRobot(serial);
         });
 
-    form.append([group.append([keyLabel, keyInput])])
-
     // var row = selectionRow.append([]);
-    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, explain, spacerbtn, form, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
+    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, explain, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
 
     $("body").html(content);
 }
@@ -395,7 +364,6 @@ function fillQuestions()
 
 function fillIntro()
 {
-    console.log(parseInt(serial));
     var data = firebase.database().ref("robots").orderByKey().equalTo(String(parseInt(serial)))
     data.on("child_added", function(word)
     {
@@ -408,8 +376,6 @@ function fillIntro()
         content.append($("<p>", { class: "text-center" }).append(word.child("type").val()));
         content.append("<br>");
         content.append($("<p>", { class: "text-center" }).append(word.child("character").val()));
-
-        console.log(content);
 
         $("#robotName").append($("<h3>").text(robotName));
         $("#intro").append(content);
@@ -477,9 +443,9 @@ function showRobot(robot)
     $(".textwall").hide();
 
     fillQuestions();
+    fillIntro();
     fillMainContent();
     showModal();
-    fillIntro();
 }
 
 function showModal()
