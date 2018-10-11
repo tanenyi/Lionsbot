@@ -115,6 +115,22 @@ function termsNconditions(serial)
             type: "button",
             class: "btn btn-primary waves-effect btnpolicyyes"
         }).html("I Agree");
+    var form = $("<div>",
+        {
+            class: "col-4 offset-4"
+        });
+    var group = $("<div>",
+        {
+            class: "form-group"
+        });
+    var keyLabel = $("<label>").html("Authetication Key<br>From Robot");
+    var keyInput = $("<input>",
+        {
+            id: "key",
+            type: "text",
+            class: "form-control text-center",
+            placeholder: "XXXX"
+        });
 
     disagreeButton.click(function()
         {
@@ -122,12 +138,27 @@ function termsNconditions(serial)
         });
     agreeButton.click(function()
         {
-            showLoading();
-            showRobot(serial);
+            var data = firebase.database().ref("robots").orderByKey().equalTo(String(parseInt(serial)))
+            data.on("child_added", function(word)
+            {
+                if ($("#key").val() == word.child("key").val())
+                {
+                    showLoading();
+                    showRobot(serial);
+                }
+                else
+                {
+                    $("#key").val("");
+                    alert("Wrong key");
+                }
+            });
+
         });
 
+    form.append([group.append([keyLabel, keyInput])])
+
     // var row = selectionRow.append([]);
-    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, explain, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
+    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, explain, spacerbtn, form, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
 
     $("body").html(content);
 }
