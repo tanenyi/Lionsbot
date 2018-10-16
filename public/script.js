@@ -9,7 +9,7 @@ $(
         serial = getParameter("robot");
         if (serial != null)
         {
-            signupToFirebase(serial);
+            signupToFirebase();
         }
         serial = getParameter("id");
         if (serial != null)
@@ -34,7 +34,7 @@ function setupFirebaseConnection()
 }
 
 // autheticates the user so they can access the full webpage
-function signupToFirebase(serial)
+function signupToFirebase()
 {
     var jumbo = $("<div>",
         {
@@ -52,7 +52,7 @@ function signupToFirebase(serial)
             id: "loginWidget"
         });
 
-    var content = jumbo.append([spacer, logo, spacerx, widget]);
+    var content = jumbo.append([spacer, logo, spacer2, widget]);
 
     $("body").html(jumbo);
     createLoginWidget()
@@ -108,13 +108,29 @@ function termsNconditions(serial)
     var disagreeButton = $("<button>",
         {
             type: "button",
-            class: "btn btnpolicyno"
+            class: "btn btn-primary waves-effect btnpolicyno"
         }).html("I Do Not Agree");
     var agreeButton = $("<button>",
         {
-            type: "buttonpolicyyess",
-            class: "btn btn-primary"
+            type: "button",
+            class: "btn btn-primary waves-effect btnpolicyyes"
         }).html("I Agree");
+    var form = $("<div>",
+        {
+            class: "col-4 offset-4"
+        });
+    var group = $("<div>",
+        {
+            class: "form-group"
+        });
+    var keyLabel = $("<label>").html("Authetication Key<br>From Robot");
+    var keyInput = $("<input>",
+        {
+            id: "key",
+            type: "text",
+            class: "form-control text-center",
+            placeholder: "XXXX"
+        });
 
     disagreeButton.click(function()
         {
@@ -122,12 +138,27 @@ function termsNconditions(serial)
         });
     agreeButton.click(function()
         {
-            showLoading();
-            showRobot(serial);
+            var data = firebase.database().ref("robots").orderByKey().equalTo(String(parseInt(serial)))
+            data.on("child_added", function(word)
+            {
+                if ($("#key").val() == word.child("key").val())
+                {
+                    showLoading();
+                    showRobot(serial);
+                }
+                else
+                {
+                    $("#key").val("");
+                    alert("Wrong key");
+                }
+            });
+
         });
 
+    form.append([group.append([keyLabel, keyInput])])
+
     // var row = selectionRow.append([]);
-    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, explain, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
+    var content = jumbo.append([logo, spacer, title, selectionRow, spacerbtn, explain, spacerbtn, form, spacerbtn, disagreeButton, horizontalSpacer, agreeButton]);
 
     $("body").html(content);
 }
@@ -186,7 +217,7 @@ function createInteractCard()
         });
     var interactHeader = $("<div>",
         {
-            class: "card-header"
+            class: "card-header waves-effect waves-light"
         });
     var interactTitle = $("<h4>");
     var interactContent = $("<div>",
@@ -238,7 +269,7 @@ function createSuggestForm()
     var spacer = "<br>"
     var button = $("<button>",
         {
-            class: "btn btn-success"
+            class: "btn btn-success waves-effect"
         }).text("Submit");
 
     var options = ["Suggest questions", "Suggest answer", "Suggest song", "Suggest other ideas", "Report error"];
@@ -277,7 +308,7 @@ function createSuggestCard()
         });
     var suggestHeader = $("<div>",
         {
-            class: "card-header"
+            class: "card-header waves-effect waves-light"
         });
     var suggestTitle = $("<h4>");
     var suggestContent = $("<div>",
@@ -305,7 +336,7 @@ function createAboutCard()
         });
     var aboutHeader = $("<div>",
         {
-            class: "card-header"
+            class: "card-header waves-effect waves-light"
         });
     var aboutTitle = $("<h4>");
     var aboutContent = $("<div>",
@@ -346,7 +377,7 @@ function fillQuestions()
             }).append($("<p>", { class: "my-auto" }).text(snap.child("name").val()));
         var row = $("<div>",
             {
-                class: "row text-center bottom-border"
+                class: "row text-center bottom-border waves-effect"
             }).append([num, question]);
 
         row.click(function()
@@ -384,10 +415,6 @@ function fillIntro()
 
 function fillMainContent()
 {
-    var row = $("<div>",
-        {
-            class: "row align-items-center"
-        });
     var left = $("<div>",
         {
             id: "intro",
@@ -399,7 +426,7 @@ function fillMainContent()
         });
     var photo = $("<img>",
         {
-            class: "card-img-top mx-auto bordering",
+            class: "card-img-top mx-auto bordering waves-effect waves-light",
             src: "rotating.gif",
         });
     var right = $("<div>",
@@ -422,7 +449,7 @@ function fillMainContent()
     rightContent.append("<br><br>");;
     rightContent.append("<a href='https://lionsbot.com'><img src=web.png class=social></img></a>");
 
-    $("#mainContent").append(row.append([left, center.append(photo), right.append(rightContent)]));
+    $("#mainContent").append([left, center.append(photo), right.append(rightContent)]);
 }
 
 function showRobot(robot)
@@ -434,7 +461,7 @@ function showRobot(robot)
     var mainContent = $("<div>",
         {
             id: "mainContent",
-            class: "card seethrough"
+            class: "row seethrough align-items-center"
         });
     var accordion = $("<div>",
         {
@@ -447,9 +474,9 @@ function showRobot(robot)
     $(".textwall").hide();
 
     fillQuestions();
-    fillIntro();
     fillMainContent();
     showModal();
+    fillIntro();
 }
 
 function showModal()
@@ -457,7 +484,7 @@ function showModal()
     var modal = $("<div>",
         {
             id: "modal",
-            class: "modal fade",
+            class: "modal fade waves-effect",
             tabindex: "-1",
             role: "dialog",
             ariaLabelledby: "exampleModalLabel",
