@@ -97,10 +97,11 @@
 }
 
 body{
-    background: linear-gradient(to bottom, #ffffff 0%, #98a4ae 100%);
+   /* background: linear-gradient(to bottom, #ffffff 0%, #98a4ae 100%);*/
+    background: #001E62;
     font-family: 'Open Sans', sans-serif;
     font-family: 'Oswald', sans-serif;
-    font-family: 'Slabo 27px', serif;
+    color: #;
 }
 
 #intro{
@@ -138,4 +139,8 @@ body{
 {
     background-color: #001E62;
     color: #FFFFFF;
+}
+
+.h2{
+    color: #fff;
 }

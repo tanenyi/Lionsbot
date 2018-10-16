@@ -438,7 +438,7 @@ function showRobot(robot)
         });
     var accordion = $("<div>",
         {
-            class: "accordion col-8 offset-2"
+            class: "accordion col-10 offset-1"
         });
 
     accordion.append([createInteractCard(), "<br>", createSuggestCard(), "<br>", createAboutCard()]);
