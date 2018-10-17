@@ -42,7 +42,7 @@ function signupToFirebase()
         });
     var logo = $("<img>",
         {
-            src: "lionsbot.png",
+            src: "finallogo.png",
             class: "rounded mx-auto"
         });
     var spacer = "<br><br>";
@@ -93,7 +93,7 @@ function termsNconditions(serial)
     });
     var logo = $("<img>",
         {
-            src: "lionsbot.png",
+            src: "finallogo.png",
             class: "rounded mx-auto"
         });
     var spacer = "<br><br>";
@@ -217,7 +217,7 @@ function createInteractCard()
         });
     var interactHeader = $("<div>",
         {
-            class: "card-header waves-effect waves-light"
+            class: "card-header waves-effect waves-light boxed"
         });
     var interactTitle = $("<h4>");
     var interactContent = $("<div>",
@@ -308,7 +308,7 @@ function createSuggestCard()
         });
     var suggestHeader = $("<div>",
         {
-            class: "card-header waves-effect waves-light"
+            class: "card-header waves-effect waves-light boxed"
         });
     var suggestTitle = $("<h4>");
     var suggestContent = $("<div>",
@@ -336,7 +336,7 @@ function createAboutCard()
         });
     var aboutHeader = $("<div>",
         {
-            class: "card-header waves-effect waves-light"
+            class: "card-header waves-effect waves-light boxed"
         });
     var aboutTitle = $("<h4>");
     var aboutContent = $("<div>",
@@ -415,6 +415,16 @@ function fillIntro()
 
 function fillMainContent()
 {
+    var top = $("<div>",
+        {
+            class: "col-12"
+        });
+    var pic = $("<div>",
+        {
+            id: "pic",
+            class: ""
+            src: "finallogo.png"
+        });
     var left = $("<div>",
         {
             id: "intro",
@@ -426,8 +436,8 @@ function fillMainContent()
         });
     var photo = $("<img>",
         {
-            class: "card-img-top mx-auto bordering waves-effect waves-light",
-            src: "rotating.gif",
+            class: "card-img-top mx-auto  waves-effect waves-light",
+            src: "ironman.gif",
         });
     var right = $("<div>",
         {
@@ -445,11 +455,11 @@ function fillMainContent()
 
     rightContent.append("<a href='https://lionsbot.com'><img src=newtwitter.png></img></a>");
     rightContent.append("<br><br>");
-    rightContent.append("<a href='https://lionsbot.com'><img src=bestfb.png></img></a>");
+    rightContent.append("<a href='https://lionsbot.com'><img src=bestfb.png class=test></img></a>");
     rightContent.append("<br><br>");;
     rightContent.append("<a href='https://lionsbot.com'><img src=web.png class=social></img></a>");
 
-    $("#mainContent").append([left, center.append(photo), right.append(rightContent)]);
+    $("#mainContent").append([top.append(pic), left, center.append(photo), right.append(rightContent)]);
 }
 
 function showRobot(robot)

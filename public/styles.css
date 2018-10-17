@@ -100,7 +100,6 @@ body{
    /* background: linear-gradient(to bottom, #ffffff 0%, #98a4ae 100%);*/
     background: #001E62;
     font-family: 'Open Sans', sans-serif;
-    font-family: 'Oswald', sans-serif;
     color: #fff;
 }
 
@@ -141,6 +140,17 @@ body{
     color: #FFFFFF;
 }
 
-.h2{
+h2{
     color: #fff;
+}
+
+.boxed {
+  border: 3px solid white ;
+}
+
+.test {
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    border: 4px solid red;
 }
